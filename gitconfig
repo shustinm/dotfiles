@@ -1,0 +1,14 @@
+[url "ssh://git@bitbucket.org/"]
+    insteadOf = https://bitbucket.org/
+
+[url "ssh://git@bitbucket.org/"]
+    insteadOf = https://shustinm@bitbucket.org/
+
+[user]
+	name = Michael Shustin
+	email = michael.shustin@aquasec.com
+[push]
+	autoSetupRemote = true
+[alias]
+	hist = log --all --decorate --oneline --graph
+	adog = log --all --decorate --oneline --graph
