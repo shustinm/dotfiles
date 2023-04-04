@@ -4,5 +4,12 @@
     ~/.gitconfig: gitconfig
     ~/.zprofile: zprofile
     ~/.zshrc: zshrc
+    ~/.config/:
+      glob: true
+      path: config/**
+      relink: true
 
 
+- create:
+  - ~/Developer
+  - ~/.config
