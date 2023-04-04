@@ -110,3 +110,5 @@ alias klog='kubectl logs -n aqua'
 # export GOPATH=$HOME/go/pkg/mod
 export GO111MODULE=on
 export GOPRIVATE=bitbucket.org/scalock/
+
+export EDITOR=lvim
