@@ -8,7 +8,7 @@
       glob: true
       path: config/**
       relink: true
-    ~/.btt_autoload_preset.json: btt/Default.bttpreset
+    ~/.btt_autoload_preset.json: btt/autoload.bttpreset
 
 
 - create:
