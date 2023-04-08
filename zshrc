@@ -86,8 +86,11 @@ zinit light docker/compose
 zinit ice as"completion"
 zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
+autoload compinit
+compinit -u
+
 zinit wait lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
+  atinit"zicdreplay" \
       zdharma-continuum/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions \

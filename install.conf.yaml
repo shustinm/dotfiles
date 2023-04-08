@@ -9,8 +9,10 @@
       path: config/**
       relink: true
     ~/.btt_autoload_preset.json: btt/autoload.bttpreset
+    ~/Brewfile: Brewfile
 
 
 - create:
   - ~/Developer
   - ~/.config
+
