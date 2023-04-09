@@ -157,6 +157,21 @@ opt.foldlevelstart = 99 -- no auto folding
 opt.clipboard=default
 
 
+vim.keymap.set('x', '<leader>p', '"_dP') -- replace text without changing the copy register
+
+vim.keymap.set('n', '<leader>d', '"_d') -- delete without yanking, e.g <leader>dd deletes the current line without yanking it
+vim.keymap.set('n', '<leader>D', '"_D') -- delete without yanking
+
+vim.keymap.set('n', '<leader>c', '"_c') -- change without yanking
+vim.keymap.set('n', '<leader>C', '"_C') -- change without yanking
+
+vim.keymap.set('', '<leader>y', '"+y') -- Start copy to os clipboard E.g: <leader>yy will copy current line to os
+vim.keymap.set('', '<leader>Y', '"+y$') -- Copy rest of the line to os clipboard like "Y" but for os clipboard
+
+vim.keymap.set('n', '<leader>p', '"+p') -- paste after cursor from os clipboard
+vim.keymap.set('n', '<leader>P', '"+P') -- paste before cursor from os clipboard
+
+
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 -- vim.api.nvim_create_autocmd("FileType", {
 --   pattern = "zsh",
