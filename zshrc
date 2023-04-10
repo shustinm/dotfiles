@@ -1,9 +1,10 @@
 
 alias lss='/bin/ls'
 alias ls="exa"
-alias ll="ls -l"
+alias ll="ls --icons -l"
+export EDITOR=lvim
 
-alias vz="vim $HOME/.zshrc"
+alias vz="$EDITOR $HOME/.zshrc"
 
 alias ctop='docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest'
 
@@ -14,7 +15,7 @@ alias tfp='terraform plan'
 function vf {
     filename=$(fzf)
     if [ -n "${filename}" ]; then
-        vim ${filename}
+        $EDITOR ${filename}
     fi
 }
 
@@ -114,4 +115,3 @@ alias klog='kubectl logs -n aqua'
 export GO111MODULE=on
 export GOPRIVATE=bitbucket.org/scalock/
 
-export EDITOR=lvim
