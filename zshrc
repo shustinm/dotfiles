@@ -1,7 +1,7 @@
 
 alias lss='/bin/ls'
 alias ls="exa"
-alias ll="ls --icons -l"
+alias ll="ls --octal-permissions --no-permissions --icons -h -l"
 export EDITOR=lvim
 
 alias vz="$EDITOR $HOME/.zshrc"
