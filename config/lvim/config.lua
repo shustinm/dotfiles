@@ -3,6 +3,9 @@
  `lvim` is the global options object
 ]]
 
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- vim options
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
@@ -23,12 +26,12 @@ lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
--- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
--- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 
 -- -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["d"] = {}
+lvim.builtin.which_key.mappings["p"] = {}
 
 -- -- Change theme settings
 lvim.colorscheme = "darcula-solid"
@@ -156,20 +159,19 @@ opt.sessionoptions:remove('options') -- don't save keymaps and local options
 opt.foldlevelstart = 99 -- no auto folding
 opt.clipboard=default
 
+local function map(mode, lhs, rhs, desc, opts)
+    opts = opts or {}
+    opts.desc = desc
+    vim.keymap.set(mode, lhs, rhs, opts)
+end
 
-vim.keymap.set('x', '<leader>p', '"_dP') -- replace text without changing the copy register
 
-vim.keymap.set('n', '<leader>d', '"_d') -- delete without yanking, e.g <leader>dd deletes the current line without yanking it
-vim.keymap.set('n', '<leader>D', '"_D') -- delete without yanking
-
-vim.keymap.set('n', '<leader>c', '"_c') -- change without yanking
-vim.keymap.set('n', '<leader>C', '"_C') -- change without yanking
-
-vim.keymap.set('', '<leader>y', '"+y') -- Start copy to os clipboard E.g: <leader>yy will copy current line to os
-vim.keymap.set('', '<leader>Y', '"+y$') -- Copy rest of the line to os clipboard like "Y" but for os clipboard
-
-vim.keymap.set('n', '<leader>p', '"+p') -- paste after cursor from os clipboard
-vim.keymap.set('n', '<leader>P', '"+P') -- paste before cursor from os clipboard
+map('x', '<leader>p', '"_dp', 'replace text without changing the copy register')
+map('x', '<leader>P', '"_dP', 'replace text without changing the copy register')
+map('n', '<leader>d', '"_d', 'delete without yanking') -- e.g <leader>dd deletes the current line without yanking it
+map('n', '<leader>D', '"_D', 'delete without yanking')
+map('n', '<leader>c', '"_c', 'change without yanking')
+map('n', '<leader>C', '"_C', 'change without yanking')
 
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
