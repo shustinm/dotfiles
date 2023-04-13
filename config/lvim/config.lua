@@ -31,7 +31,9 @@ lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 
 -- -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["d"] = {}
+lvim.builtin.which_key.mappings["c"] = {}
 lvim.builtin.which_key.mappings["p"] = {}
+lvim.builtin.which_key.mappings["x"] = { "<cmd>BufferKill<CR>", "Close Buffer" }
 
 -- -- Change theme settings
 lvim.colorscheme = "darcula-solid"
@@ -166,13 +168,80 @@ local function map(mode, lhs, rhs, desc, opts)
 end
 
 
-map('x', '<leader>p', '"_dp', 'replace text without changing the copy register')
-map('x', '<leader>P', '"_dP', 'replace text without changing the copy register')
-map('n', '<leader>d', '"_d', 'delete without yanking') -- e.g <leader>dd deletes the current line without yanking it
-map('n', '<leader>D', '"_D', 'delete without yanking')
-map('n', '<leader>c', '"_c', 'change without yanking')
-map('n', '<leader>C', '"_C', 'change without yanking')
+map('x', '<leader>p', '"_dP', 'Replace without yanking')
 
+map('n', '<leader>d', '"_d', 'Delete without yanking') -- e.g <leader>dd deletes the current line without yanking it
+map('n', '<leader>D', '"_D', 'Delete until EOL without yanking')
+
+map('n', '<leader>c', '"_c', 'Change without yanking')
+map('n', '<leader>C', '"_C', 'Change until EOL without yanking')
+
+map('', '<leader>y', '"+y', 'Yank to clipboard') -- E.g: <leader>yy will yank current line to os clipboard
+map('', '<leader>Y', '"+y$', 'Yank until EOL to clipboard')
+
+map('n', '<leader>p', '"+p', 'Paste after cursor from clipboard')
+map('n', '<leader>P', '"+P', 'Paste before cursor from clipboard')
+
+lvim.builtin.treesitter.textobjects.select = {
+    enable = true,
+    lookahead = true,
+    keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        ["ab"] = "@block.outer",
+        ["ib"] = "@block.inner",
+        ["al"] = "@loop.outer",
+        ["il"] = "@loop.inner",
+        ["a/"] = "@comment.outer",
+        ["i/"] = "@comment.outer", -- no inner for comment
+        ["aa"] = "@parameter.outer", -- parameter -> argument
+        ["ia"] = "@parameter.inner",
+    },
+}
+lvim.builtin.treesitter.textobjects.move = {
+    enable = true,
+    set_jumps = true, -- whether to set jumps in the jumplist
+    goto_next_start = {
+        ["]m"] = "@function.outer",
+        ["gj"] = "@function.outer",
+        ["]]"] = "@class.outer",
+        ["]b"] = "@block.outer",
+        ["]a"] = "@parameter.inner",
+    },
+    goto_next_end = {
+        ["]M"] = "@function.outer",
+        ["gJ"] = "@function.outer",
+        ["]["] = "@class.outer",
+        ["]B"] = "@block.outer",
+        ["]A"] = "@parameter.inner",
+    },
+    goto_previous_start = {
+        ["[m"] = "@function.outer",
+        ["gk"] = "@function.outer",
+        ["[["] = "@class.outer",
+        ["[b"] = "@block.outer",
+        ["[a"] = "@parameter.inner",
+    },
+    goto_previous_end = {
+        ["[M"] = "@function.outer",
+        ["gK"] = "@function.outer",
+        ["[]"] = "@class.outer",
+        ["[B"] = "@block.outer",
+        ["[A"] = "@parameter.inner",
+    },
+}
+
+map({'n', 't'}, '<C-h>', '<C-w>h')
+map({'n', 't'}, '<C-j>', '<C-w>j')
+map({'n', 't'}, '<C-k>', '<C-w>k')
+map({'n', 't'}, '<C-l>', '<C-w>l')
+
+map('n', '<M-e>', '<cmd>vsplit<cr>')
+map('n', '<M-o>', '<cmd>split<cr>')
+
+map('n', '<M-q>', '<cmd>q<cr>')
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 -- vim.api.nvim_create_autocmd("FileType", {

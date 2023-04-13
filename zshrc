@@ -5,6 +5,7 @@ alias ll="ls --octal-permissions --no-permissions --icons -h -l"
 export EDITOR=lvim
 
 alias vz="$EDITOR $HOME/.zshrc"
+alias v=$EDITOR
 
 alias ctop='docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest'
 
