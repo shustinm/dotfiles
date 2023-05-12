@@ -12,6 +12,8 @@ alias ctop='docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock qua
 alias tf='terraform'
 alias tfi='terraform init'
 alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tfaa='terraform apply -auto-approve'
 
 function vf {
     filename=$(fzf)
