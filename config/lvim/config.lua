@@ -140,6 +140,12 @@ lvim.plugins = {
     event = {"CmdlineEnter"},
     ft = {"go", 'gomod'},
     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+  },
+  {
+    "tpope/vim-unimpaired",
+  },
+  {
+    "johmsalas/text-case.nvim",
   }
 }
 
@@ -263,6 +269,22 @@ map('n', '<M-k>', '<cmd>BufferLineCycleNext<CR>') -- Alt+k to move to right
 map('n', '<M-J>', '<cmd>BufferLineMovePrev<CR>') -- Alt+Shift+j grab to with you to left
 map('n', '<M-K>', '<cmd>BufferLineMoveNext<CR>') -- Alt+Shift+k grab to with you to right
 
+
+local api = vim.api
+local textcase = require('textcase')
+textcase.setup {}
+
+api.nvim_create_user_command('UpperCase', function() textcase.current_word('to_upper_case') end, {})
+api.nvim_create_user_command('LowerCase', function() textcase.current_word('to_lower_case') end, {})
+api.nvim_create_user_command('SnakeCase', function() textcase.current_word('to_snake_case') end, {})
+api.nvim_create_user_command('ConstantCase', function() textcase.current_word('to_dash_case') end, {})
+api.nvim_create_user_command('DashCase', function() textcase.current_word('to_constant_case') end, {})
+api.nvim_create_user_command('DotCase', function() textcase.current_word('to_dot_case') end, {})
+api.nvim_create_user_command('CamelCase', function() textcase.current_word('to_camel_case') end, {})
+api.nvim_create_user_command('PascalCase', function() textcase.current_word('to_pascal_case') end, {})
+api.nvim_create_user_command('TitleCase', function() textcase.current_word('to_title_case') end, {})
+api.nvim_create_user_command('PathCase', function() textcase.current_word('to_path_case') end, {})
+api.nvim_create_user_command('PhraseCase', function() textcase.current_word('to_phrase_case') end, {})
 
 -- -- Autocommands (`:help autocmd`) <https://neovim.io/doc/user/autocmd.html>
 -- vim.api.nvim_create_autocmd("FileType", {
