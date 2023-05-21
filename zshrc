@@ -2,7 +2,12 @@
 alias lss='/bin/ls'
 alias ls="exa"
 alias ll="ls --octal-permissions --no-permissions --icons -h -l"
-export EDITOR=lvim
+
+alias cat="bat"
+alias ccat=/bin/cat
+
+alias lv=lvim
+export EDITOR=nvim
 
 alias vz="$EDITOR $HOME/.zshrc"
 alias v=$EDITOR
