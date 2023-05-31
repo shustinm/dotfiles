@@ -34,6 +34,6 @@
     stdout: true
     stdin: true
   - description:
-    command: gh auth login
+    command: gh auth status || gh auth login
     stdout: true
     stdin: true
