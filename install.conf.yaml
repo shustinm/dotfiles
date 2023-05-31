@@ -9,10 +9,27 @@
       create: true
       relink: true
       glob: true
-    ~/.btt_autoload_preset.json: btt/autoload.bttpreset
-    ~/Brewfile: Brewfile
-
+    ~/.btt_autoload_preset.json: 
+      if: '[ `uname` = Darwin ]'
+      path: btt/autoload.bttpreset
+    ~/Brewfile: 
+      if: '[ `uname` = Darwin ]'
+      path: Brewfile
 
 - create:
   - ~/Developer
   - ~/.config
+
+- shell:
+  - description: starship install
+    command: command -v starship >/dev/null || curl -sS https://starship.rs/install.sh | sh
+    stdout: true
+    stdin: true
+  - description: apt-get install
+    command: |
+      if [ "`uname`" = "Linux" ]; then
+        sudo apt update
+        sudo apt install -y $(cat apt/packages.txt)
+      fi
+    stdout: true
+    stdin: true
