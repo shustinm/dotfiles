@@ -33,3 +33,7 @@
       fi
     stdout: true
     stdin: true
+  - description:
+    command: gh auth login
+    stdout: true
+    stdin: true
