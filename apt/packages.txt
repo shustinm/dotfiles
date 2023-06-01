@@ -2,3 +2,11 @@ zsh
 neovim
 exa
 gh
+fzf
+gcc
+g++
+nodejs
+npm
+golang
+unzip
+python3-venv
