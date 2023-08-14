@@ -122,9 +122,16 @@ export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
+# VAST DATA
+export PATH="$PATH:$HOME/Developer/infra/user-scripts"
+
 alias klog='kubectl logs -n aqua'
 
 # export GOPATH=$HOME/go/pkg/mod
 export GO111MODULE=on
 export GOPRIVATE=bitbucket.org/scalock/
 
+# kitty ssh fix: https://wiki.archlinux.org/title/Kitty#Terminal_issues_with_SSH
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+
+alias kt="kitty +kitten"
