@@ -9,10 +9,10 @@
       create: true
       relink: true
       glob: true
-    ~/.btt_autoload_preset.json: 
+    ~/.btt_autoload_preset.json:
       if: '[ `uname` = Darwin ]'
       path: btt/autoload.bttpreset
-    ~/Brewfile: 
+    ~/Brewfile:
       if: '[ `uname` = Darwin ]'
       path: Brewfile
 
@@ -21,7 +21,7 @@
   - ~/.config
 
 - shell:
-  - description: install starship 
+  - description: install starship
     command: command -v starship >/dev/null || curl -sS https://starship.rs/install.sh | sh
     stdout: true
     stdin: true
