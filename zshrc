@@ -122,6 +122,8 @@ export PATH="/opt/homebrew/opt/ruby@2.7/bin:$PATH"
 export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+
 
 # VAST DATA
 export PATH="$PATH:$HOME/Developer/infra/user-scripts"
@@ -134,5 +136,6 @@ export GOPRIVATE=bitbucket.org/scalock/
 
 # kitty ssh fix: https://wiki.archlinux.org/title/Kitty#Terminal_issues_with_SSH
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
+alias sshh="/usr/bin/ssh"
 
 alias kt="kitty +kitten"
