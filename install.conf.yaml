@@ -5,8 +5,9 @@
     ~/.zprofile: zprofile
     ~/.zshrc: zshrc
     ~/.config/:
-      path: config/**
+      path: config/*
       create: true
+      force: true
       relink: true
       glob: true
     ~/.btt_autoload_preset.json:
