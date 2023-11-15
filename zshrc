@@ -35,8 +35,10 @@ alias gu="git add -u"
 alias gco="git checkout"
 alias gfo="git fetch origin"
 alias gs="git switch"
-alias gur="git fetch upstream && git checkout upstream/release/4_5_0"
-alias gud="git fetch upstream && git checkout upstream/develop"
+
+function gph {
+    git pull origin $(git rev-parse --abbrev-ref HEAD)
+}
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -119,7 +121,7 @@ fi
 
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/opt/ruby@2.7/bin:$PATH"
-export PATH="/opt/homebrew/opt/python@3.11/libexec/bin:$PATH"
+export PATH="/opt/homebrew/opt/python@3.12/libexec/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"

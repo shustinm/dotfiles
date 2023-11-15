@@ -1,1 +1,1 @@
-git clone https://github.com/shustinm/dotfiles.git && cd dotfiles && ./install
+git clone --recurse-submodules https://github.com/shustinm/dotfiles.git && cd dotfiles && ./install
