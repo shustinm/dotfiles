@@ -34,17 +34,14 @@
       fi
     stdout: true
     stdin: true
-  - description:
-    command: gh auth status || gh auth login
-    stdout: true
-    stdin: true
   - description: install nvim
     command: |
-      if ! command -v nvim &> /dev/null; then
-        curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-        chmod u+x nvim.appimage
-        sudo mv squashfs-root /
-        sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
+      if [ "$(uname -s)" = "Linux" ]; then
+        if ! command -v nvim &> /dev/null; then
+          curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+          chmod u+x nvim.appimage
+          sudo mv nvim.appimage /usr/bin/nvim
+        fi
       fi
     stdout: true
     stdin: true

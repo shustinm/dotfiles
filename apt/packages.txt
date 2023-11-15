@@ -1,5 +1,4 @@
 zsh
-neovim
 exa
 gh
 fzf
@@ -10,3 +9,4 @@ npm
 golang
 unzip
 python3-venv
+libfuse2
