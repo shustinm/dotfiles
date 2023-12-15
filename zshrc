@@ -141,3 +141,5 @@ export GOPRIVATE=bitbucket.org/scalock/
 alias sshh="/usr/bin/ssh"
 
 alias kt="kitty +kitten"
+
+source $HOME/.config/op/plugins.sh
