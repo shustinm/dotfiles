@@ -1,0 +1,2 @@
+https://cli.github.com/packages/rpm/gh-cli.repo
+https://download.docker.com/linux/centos/docker-ce.repo

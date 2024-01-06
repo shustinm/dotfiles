@@ -29,12 +29,16 @@
   - description: Install packages
     command: |
       if [ "`uname`" = "Linux" ]; then
-        id_like = $(awk -F= '/^ID_LIKE/{print $2}' /etc/os-release)
-        if [[ 'ubuntu' = *$id_like* ]]; then
+        id_like=$(awk -F= '/^ID_LIKE/{print $2}' /etc/os-release)
+        if [[ $id_like = *'ubuntu'* ]]; then
           sudo apt update
           sudo apt install -y $(cat apt/packages.txt)
-        elif [[ 'fedora' = *$id_like* ]]; then
-          sudo dnf upgrade --refresh
+        elif [[ $id_like = *'fedora'* ]]; then
+          sudo dnf upgrade -y --refresh
+          sudo dnf install -y epel-release 'dnf-command(config-manager)'
+          while read in; do sudo rpm --import "$in"; done < dnf/rpm_keys.txt
+          while read in; do sudo dnf config-manager --add-repo "$in"; done < dnf/repos.txt
+          sudo ln -s $(pwd)/dnf/yum/* /etc/yum.repos.d/
           sudo dnf install -y $(cat dnf/packages.txt)
         fi
       fi
