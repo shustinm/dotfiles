@@ -26,11 +26,17 @@
     command: command -v starship >/dev/null || curl -sS https://starship.rs/install.sh | sh
     stdout: true
     stdin: true
-  - description: apt-get install
+  - description: Install packages
     command: |
       if [ "`uname`" = "Linux" ]; then
-        sudo apt update
-        sudo apt install -y $(cat apt/packages.txt)
+        id_like = $(awk -F= '/^ID_LIKE/{print $2}' /etc/os-release)
+        if [[ 'ubuntu' = *$id_like* ]]; then
+          sudo apt update
+          sudo apt install -y $(cat apt/packages.txt)
+        elif [[ 'fedora' = *$id_like* ]]; then
+          sudo dnf upgrade --refresh
+          sudo dnf install -y $(cat dnf/packages.txt)
+        fi
       fi
     stdout: true
     stdin: true

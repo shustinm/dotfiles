@@ -1,0 +1,12 @@
+epel-release
+zsh
+neovim
+exa
+gh
+fzf
+gcc
+g++
+nodejs
+npm
+golang
+unzip
