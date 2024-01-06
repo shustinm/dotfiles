@@ -1,5 +1,4 @@
 zsh
-neovim
 exa
 gh
 fzf
