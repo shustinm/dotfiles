@@ -1,0 +1,18 @@
+let mapleader=" "
+
+""" Plugins  --------------------------------
+Plug 'easymotion/vim-easymotion'
+map <Leader> <Plug>(easymotion-prefix)
+map f <Plug>(easymotion-bd-f)
+map F <Plug>(easymotion-bd-F)
+let g:EasyMotion_smartcase = 1
+
+set which-key
+set timeoutlen=5000
+
+set multicursor
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'machakann/vim-highlightedyank'

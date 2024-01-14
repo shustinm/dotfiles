@@ -16,6 +16,7 @@
     ~/Brewfile:
       if: '[ `uname` = Darwin ]'
       path: Brewfile
+    ~/.ideavimrc: jetbrains/.ideavimrc
 
 - create:
   - ~/Developer
