@@ -12,6 +12,9 @@ set timeoutlen=5000
 
 set multicursor
 
+set visualbell
+set noerrorbells
+
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/argtextobj.vim'
