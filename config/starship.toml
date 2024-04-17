@@ -1,6 +1,28 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+
 # Disable the package module, hiding it from the prompt completely
 [c]
 disabled = true
+
+[cmake]
+disabled = true
+
+[package]
+style = 'bold #ff9966'
+
+[ruby]
+disabled = true
+
+[custom.prop-prefix]
+command = 'git config --local --get branch.$(git branch --show-current).prefix'
+when = 'git config --local --get branch.$(git branch --show-current).prefix'
+format = '󰁔 [ $output]($style):'
+
+[custom.prop-target]
+command = 'git config --local --get branch.$(git branch --show-current).target'
+when = 'git config --local --get branch.$(git branch --show-current).target'
+format = '[$output]($style) '
+
+
