@@ -127,15 +127,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 
-# VAST DATA
-export PATH="$PATH:$HOME/Developer/infra/user-scripts"
-
-alias klog='kubectl logs -n aqua'
-
-# export GOPATH=$HOME/go/pkg/mod
-export GO111MODULE=on
-export GOPRIVATE=bitbucket.org/scalock/
-
 # kitty ssh fix: https://wiki.archlinux.org/title/Kitty#Terminal_issues_with_SSH
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 alias sshh="/usr/bin/ssh"
@@ -143,4 +134,11 @@ alias sshh="/usr/bin/ssh"
 alias kt="kitty +kitten"
 alias icat="kt icat"
 
-source $HOME/.config/op/plugins.sh
+if [ -f $HOME/.config/op/plugins.sh ]; then
+    source $HOME/.config/op/plugins.sh
+fi
+
+# VAST
+if [ -d $HOME/Developer/vast ]; then
+    source $HOME/Developer/vast/initrc.sh
+fi
