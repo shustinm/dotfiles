@@ -1,3 +1,7 @@
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+export HISTSIZE=100000
+export SAVEHIST=$HISTSIZE
 
 alias lss='/bin/ls'
 alias ls="exa"
@@ -34,6 +38,7 @@ alias ga="git add"
 alias gu="git add -u"
 alias gco="git checkout"
 alias gfo="git fetch origin"
+alias gfu="git fetch upstream"
 alias gs="git switch"
 
 function gph {
