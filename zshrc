@@ -3,6 +3,8 @@ setopt HIST_IGNORE_ALL_DUPS
 export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
 
+bindkey "^X\\x7f" backward-kill-line
+
 alias lss='/bin/ls'
 alias ls="exa"
 alias ll="ls --octal-permissions --no-permissions --icons -h -l"
