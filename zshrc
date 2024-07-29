@@ -20,6 +20,8 @@ alias v=$EDITOR
 
 alias ctop='docker run --rm -ti -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest'
 
+alias grep='grep --color=auto'
+
 alias tf='terraform'
 alias tfi='terraform init'
 alias tfp='terraform plan'
@@ -38,11 +40,17 @@ alias gp="git push"
 alias gc="git commit"
 alias ga="git add"
 alias gu="git add -u"
-alias gco="git checkout"
 alias gfo="git fetch origin"
 alias gfu="git fetch upstream"
 alias gs="git switch"
 
+function gco {
+    if [ $# -eq 0 ]; then
+        git checkout -q $(git branch --sort=-committerdate | fzf)
+    else
+        git checkout "$@"
+    fi
+}
 function gph {
     git pull origin $(git rev-parse --abbrev-ref HEAD)
 }
