@@ -30,3 +30,5 @@
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [maintenance]
 	repo = /Users/michael.shustin/Developer/orion
+[init]
+	defaultBranch = main
