@@ -2,8 +2,7 @@ setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
-
-bindkey "^X\\x7f" backward-kill-line
+WORDCHARS=${WORDCHARS//\//}
 
 alias ls="exa"
 alias ll="ls --octal-permissions --no-permissions --icons -h -l"
