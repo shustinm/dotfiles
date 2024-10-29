@@ -5,12 +5,10 @@ export SAVEHIST=$HISTSIZE
 
 bindkey "^X\\x7f" backward-kill-line
 
-alias lss='/bin/ls'
 alias ls="exa"
 alias ll="ls --octal-permissions --no-permissions --icons -h -l"
 
 alias cat="bat"
-alias ccat=/bin/cat
 
 alias lv=lvim
 export EDITOR=nvim
@@ -144,7 +142,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # kitty ssh fix: https://wiki.archlinux.org/title/Kitty#Terminal_issues_with_SSH
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
-alias sshh="/usr/bin/ssh"
 
 alias kt="kitty +kitten"
 alias icat="kt icat"
@@ -157,3 +154,17 @@ fi
 if [ -d $HOME/Developer/vast ]; then
     source $HOME/Developer/vast/initrc.sh
 fi
+
+# Function to list interfaces with IPv4 addresses
+ip4_interfaces() {
+  ifconfig | awk '/^[a-z]/ {iface=$1} /inet / {print iface, $2}'
+}
+
+# Function to list interfaces with IPv6 addresses
+ip6_interfaces() {
+  ifconfig | awk '/^[a-z]/ {iface=$1} /inet6 / {print iface, $2}'
+}
+
+# Optional aliases
+alias ip4="ip4_interfaces"
+alias ip6="ip6_interfaces"
