@@ -4,10 +4,6 @@ export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
 WORDCHARS=${WORDCHARS//\//}
 
-alias ls="exa"
-alias ll="ls --octal-permissions --no-permissions --icons -h -l"
-
-alias cat="bat"
 
 alias lv=lvim
 export EDITOR=nvim
@@ -52,6 +48,16 @@ function gph {
     git pull origin $(git rev-parse --abbrev-ref HEAD)
 }
 
+fetch_and_checkout() {
+  if [ -z "$1" ]; then
+    echo "Usage: fetch_and_checkout <branch>"
+    return 1
+  fi
+  git fetch origin "$1" && git checkout "$1"
+}
+
+alias gfco="fetch_and_checkout"
+
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
@@ -94,11 +100,14 @@ zinit light sharkdp/fd
 zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
 zinit light sharkdp/bat
 export BAT_THEME="ansi"
+alias cat="bat"
 
 # ogham/exa, replacement for ls
 zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
 zinit light ogham/exa
 export PATH="$HOME/.local/share/zinit/plugins/ogham---exa/bin:$PATH"
+alias ls="exa"
+alias ll="ls --octal-permissions --no-permissions --icons -h -l"
 
 # zsh-fzf-history-search
 zinit ice lucid wait'0'
@@ -164,6 +173,6 @@ ip6_interfaces() {
   ifconfig | awk '/^[a-z]/ {iface=$1} /inet6 / {print iface, $2}'
 }
 
-# Optional aliases
+# ifconfig aliases
 alias ip4="ip4_interfaces"
 alias ip6="ip6_interfaces"
