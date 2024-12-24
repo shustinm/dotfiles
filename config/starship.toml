@@ -1,9 +1,10 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+command_timeout = 1000
 
-# Disable the package module, hiding it from the prompt completely
 [c]
+# Disable the module, hiding it from the prompt completely
 disabled = true
 
 [cmake]
@@ -19,10 +20,11 @@ disabled = true
 command = 'git config --local --get branch.$(git branch --show-current).prefix'
 when = 'git config --local --get branch.$(git branch --show-current).prefix'
 format = '󰁔 [ $output]($style):'
+ignore_timeout = true
 
 [custom.prop-target]
 command = 'git config --local --get branch.$(git branch --show-current).target'
 when = 'git config --local --get branch.$(git branch --show-current).target'
 format = '[$output]($style) '
-
+ignore_timeout = true
 
