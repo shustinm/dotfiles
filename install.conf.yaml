@@ -4,7 +4,7 @@
     ~/.gitconfig: gitconfig
     ~/.zprofile: zprofile
     ~/.zshrc: zshrc
-    ~/.zshenv: zshrc
+    ~/.zshenv: zshenv
     ~/.config/:
       path: config/*
       create: true
