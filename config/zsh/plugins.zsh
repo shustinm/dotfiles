@@ -33,3 +33,4 @@ if [ "$DROP_IN_REPLACEMENTS" = "1" ]; then
         alias ls="eza ${EZA_PARAMS}"
     fi
 fi
+

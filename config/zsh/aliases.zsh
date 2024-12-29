@@ -34,3 +34,4 @@ ip6_interfaces() {
 # ifconfig aliases
 alias ip4="ip4_interfaces"
 alias ip6="ip6_interfaces"
+

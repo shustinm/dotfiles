@@ -8,3 +8,4 @@ export BAT_THEME=default
 
 # Eza params
 export EZA_PARAMS="--octal-permissions --no-permissions --icons --header"
+
