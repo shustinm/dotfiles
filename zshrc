@@ -2,6 +2,7 @@ setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt auto_cd
 export HISTSIZE=100000
+export HISTFILE=$HOME/.zsh_history
 export SAVEHIST=$HISTSIZE
 WORDCHARS=${WORDCHARS//\//}
 

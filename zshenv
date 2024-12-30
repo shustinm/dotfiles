@@ -11,8 +11,3 @@ export PATH="$PATH:$HOME/go/bin"
 if [ -f "$HOME/.cargo/env" ]; then
 	. "$HOME/.cargo/env"
 fi
-
-if command -v nvim >/dev/null 2>&1; then
-	export EDITOR=nvim
-fi
-

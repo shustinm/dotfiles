@@ -9,3 +9,6 @@ export BAT_THEME=default
 # Eza params
 export EZA_PARAMS="--octal-permissions --no-permissions --icons --header"
 
+# Use nvim as editor, but disable vim mode in terminal
+export EDITOR=nvim
+bindkey -e
