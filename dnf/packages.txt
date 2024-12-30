@@ -1,6 +1,7 @@
 1password 1password-cli
 docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-exa
+eza
+bat
 fzf
 g++
 gcc
@@ -9,5 +10,6 @@ git-delta
 golang
 nodejs
 npm
+tmux
 unzip
 zsh
