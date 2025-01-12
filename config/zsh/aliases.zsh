@@ -10,6 +10,7 @@ function vf {
     fi
 }
 
+unalias gco
 function gco {
     if [ $# -eq 0 ]; then
         git checkout -q $(git branch --sort=-committerdate | fzf)
@@ -17,6 +18,7 @@ function gco {
         git checkout "$@"
     fi
 }
+
 function gph {
     git pull origin $(git rev-parse --abbrev-ref HEAD)
 }
