@@ -57,17 +57,3 @@ if [ -d $HOME/Developer/vast ]; then
     source $HOME/Developer/vast/initrc.sh
 fi
 
-# WIP
-function _git_checkout_limited_branches() {
-  # If not in a Git repo, fall back to default
-  if ! git rev-parse --is-inside-work-tree &>/dev/null; then
-    _call_function ret _git-checkout
-    return
-  fi
-
-  # Otherwise, list just the most recent branches
-  local branches=("${(@f)$(git for-each-ref \
-    --sort=-committerdate --format='%(refname:short)' refs/heads/ | head -n 8)}")
-  _describe -V -t branches 'branches' branches
-}
-compdef _git_checkout_limited_branches git=checkout
