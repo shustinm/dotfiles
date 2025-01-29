@@ -37,3 +37,7 @@ ip6_interfaces() {
 alias ip4="ip4_interfaces"
 alias ip6="ip6_interfaces"
 
+# neofetch alias for fastfetch
+if command -v fastfetch >/dev/null 2>&1; then
+    alias neofetch="fastfetch"
+fi
