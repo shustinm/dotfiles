@@ -26,9 +26,9 @@ The `.zshrc` file is the entrypoint of the zsh configuration, (it runs every tim
 ### ~/.config/zsh/vars.zsh
 This is a variable/configuration file. 
 You should change the value of the EDITOR env var, as you're likely not using `nvim` (so change it to `vim`). The `DROP_IN_REPLACEMENTS` variable enables replacing cat with bat, so you can disable if you don't like it. But here's another trick: 
-```bash
-cat file.txt  # Will use bat
-\cat file.txt  # Will ignore aliases, and won't use bat
+```console
+❯ cat file.txt  # Will use bat
+❯ \cat file.txt  # Will ignore aliases, and won't use bat
 ```
 
 ### ~/.config/zsh/plugins.zsh
