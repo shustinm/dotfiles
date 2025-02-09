@@ -1,10 +1,12 @@
 If you're reading this, it's likely that you've been referred because you're new to shell configuration, don't have your shell configured, or worse, use oh-my-zsh.
 
 To be cool like me, run the installation script below.
-> [!IMPORTANT]  
+> [!WARNING]  
 > This is an installer for a _personal_ configuration of mine. This means that there are things irrelevant for your setup, and some opinionated (but configurable) defaults. The sections below will guide you through the configuration and things you might want to customize.
 
 ## Installation script
+> [!NOTE]
+> This script will never over-write a file without backing it up first
 ```bash
 curl -fsSL https://raw.githubusercontent.com/shustinm/dotfiles/main/config/zsh/install.sh | bash
 ```
