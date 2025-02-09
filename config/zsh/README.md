@@ -18,7 +18,7 @@ The entrypoint of the zsh configuration is the `.zshrc` file, located in your ho
 cat ~/.zshrc
 ```
 
-If you ever used `cat`, you'll notice it's suddenly much better. You have syntax highlighting and can scroll inside the file (press q to quit). Here's what you need to know - thisn't `cat`, this is `bat`. My terminal configuration replaces some programs with a more modern alternatives. You'll see later how you can change this behavior.
+If you ever used `cat`, you'll notice it's suddenly much better. You have syntax highlighting and can scroll inside the file (press q to quit). Here's what you need to know - this isn't `cat`, this is [`bat`](https://github.com/sharkdp/bat). My terminal configuration replaces some programs with a more modern alternatives. You'll see later how you can change this behavior. By the way, have you tried running `ll`? (Check what it's alised to by running `alias ll`, also check what `ls` is aliased to)
 
 ### ~/.zshrc
 The `.zshrc` file is the entrypoint of the zsh configuration, (it runs every time zsh starts). It's a bit long and frightening, in general - it sets up some some zsh params, makes sure zinit (zsh plugin manager) is installed, as well as starship (shell prompt), and completions. The next important part is nearly at the bottom. It sources (runs) the other configuration files. They are located in `$HOME/.config/zsh`
