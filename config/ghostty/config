@@ -1,0 +1,5 @@
+theme = catppuccin-mcha
+window-save-state = always
+macos-titlebar-style = tabs
+macos-option-as-alt = left
+font-size = 15.5
