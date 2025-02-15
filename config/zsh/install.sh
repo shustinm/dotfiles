@@ -8,8 +8,8 @@ BOLD="\033[1m"
 RESET="\033[0m"
 
 # Unicode symbols
-CHECKMARK="\u2714"  # ✓
-CROSS="\u2718"      # ✘
+CHECKMARK="✓"
+CROSS="✘"
 
 REPO="shustinm/dotfiles"
 CONFIG_LOCATION="config/zsh"
@@ -24,17 +24,12 @@ check_and_install() {
         echo -e "${GREEN}${CHECKMARK}${RESET} $software_name is already installed."
     else
         echo -e "${RED}${CROSS}${RESET} $software_name is ${RED}not${RESET} installed."
-        read -p "Would you like to install $software_name (recommended)? (y/N): " install_choice
-        if [[ $install_choice == "y" || $install_choice == "Y" ]]; then
-            echo "Installing $software_name..."
-            eval "$install_command"
-            if command -v "$software_name" &> /dev/null; then
-                echo -e "${GREEN}${CHECKMARK} $software_name installed successfully.${RESET}"
-            else
-                echo -e "${RED}${CROSS} Installation of $software_name failed. Please check and try again.${RESET}"
-            fi
+        echo "Installing $software_name..."
+        eval "$install_command"
+        if command -v "$software_name" &> /dev/null; then
+            echo -e "${GREEN}${CHECKMARK} $software_name installed successfully.${RESET}"
         else
-            echo "$software_name installation skipped."
+            echo -e "${RED}${CROSS} Installation of $software_name failed. Please check and try again.${RESET}"
         fi
     fi
 }
@@ -62,7 +57,7 @@ backup_zsh_files() {
 }
 
 download_zsh_files() {
-    mkdir -p "$HOME/.$CONFIG_LOCATION"
+    mkdir -p "$HOME/.$CONFIG_LOCATION" || { echo "Failed to create directory $HOME/.$CONFIG_LOCATION"; exit 1; }
 
     for file in $BARE_FILES; do
         [[ " $IGNORED_FILES " =~ " $file " ]] && continue
