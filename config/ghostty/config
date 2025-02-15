@@ -1,4 +1,4 @@
-theme = catppuccin-mcha
+theme = catppuccin-mocha
 window-save-state = always
 macos-titlebar-style = tabs
 macos-option-as-alt = left
