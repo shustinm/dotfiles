@@ -1,6 +1,8 @@
 alias vz="$EDITOR $HOME/.zshrc"
 alias v=$EDITOR
 
+alias nvim="kv -p nvim010"
+
 alias grep='grep --color=auto'
 
 function vf {
