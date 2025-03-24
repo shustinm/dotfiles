@@ -83,6 +83,7 @@ download_zsh_files() {
 echo -e "${BOLD}${BLUE}Installing prerequisites...${RESET}"
 check_and_install "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
 check_and_install "starship" "brew install starship"
+check_and_install "font-jetbrains-mono-nerd-font" "brew install font-jetbrains-mono-nerd-font"
 check_and_install "bat" "brew install bat"
 check_and_install "fzf" "brew install fzf"
 check_and_install "eza" "brew install eza"
