@@ -8,6 +8,7 @@ gcc
 gh
 git-delta
 golang
+ncdu
 nodejs
 npm
 tmux
