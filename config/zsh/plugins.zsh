@@ -6,8 +6,8 @@ zinit ice wait="0a" lucid atload="_zsh_autosuggest_start"
 zinit light zsh-users/zsh-autosuggestions
 
 # Command completions when pressing TAB
-zinit ice atload"zicompinit; zicdreplay" blockf atpull'zinit creinstall -q .'
-zinit light zsh-users/zsh-completions
+# zinit ice atload"zicompinit; zicdreplay" blockf atpull'zinit creinstall -q .'
+# zinit light zsh-users/zsh-completions
 
 # Auto close brackets/quotes like an IDE
 zinit ice wait lucid
@@ -22,12 +22,13 @@ fi
 
 # Oh-my-zsh snippet for ls aliases (ll, la...)
 zinit snippet OMZL::directories.zsh
+zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
 
 # Replace builtins with superior utils
 if [ "$DROP_IN_REPLACEMENTS" = "1" ]; then
     if command -v bat >/dev/null 2>&1; then
-        alias cat="bat"
+        alias cat="bat ${BAT_PARAMS}"
     fi
     if command -v eza >/dev/null 2>&1; then
         alias ls="eza ${EZA_PARAMS}"
