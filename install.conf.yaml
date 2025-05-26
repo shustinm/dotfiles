@@ -58,3 +58,10 @@
       fi
     stdout: true
     stdin: true
+  - description: mac configuration
+    command: |
+      if [ "$(uname -s)" = "Darwin" ]; then
+        find darwin -name '*.sh' -exec {} \;
+      fi
+    stdout: true
+    stdin: true
