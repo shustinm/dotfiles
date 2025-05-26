@@ -32,8 +32,16 @@ zinit light-mode for \
 # Initialize Starship prompt
 eval "$(starship init zsh)"
 
+autoload -Uz compinit
+compinit
+
 # Completions should be case-insensitive
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# Crapace disabled because of a bug when completing with fzf-tab: Completions from outer directories is not showing anything
+# export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+# zstyle ':completion:*:*:*:default' menu yes select search matcher-list 'm:{a-z}={A-Za-z}' format $'\e[2;37mCompleting %d\e[m'
+# source <(carapace _carapace)
+
 
 # Aliases and fixes for kitty terminal
 if [ "$TERM" = "xterm-kitty" ]; then
