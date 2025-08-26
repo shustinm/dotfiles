@@ -16,6 +16,9 @@ style = 'bold #ff9966'
 [ruby]
 disabled = true
 
+[git_status]
+disabled = true
+
 [custom.prop-prefix]
 command = 'git config --local --get branch.$(git branch --show-current).prefix'
 when = 'git config --local --get branch.$(git branch --show-current).prefix'
