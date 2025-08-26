@@ -1,7 +1,12 @@
 alias vz="$EDITOR $HOME/.zshrc"
+alias vk="$EDITOR $HOME/.config/kitty/kitty.conf"
 alias v=$EDITOR
 
-alias nvim="kv -p nvim010"
+alias kvim="NVIM_APPNAME= kv -p nvim010"
+alias lvim="NVIM_APPNAME=lazyvim nvim"
+alias lv="lvim"
+
+export NVIM_APPNAME="lazyvim"
 
 alias grep='grep --color=auto'
 
