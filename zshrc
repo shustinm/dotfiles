@@ -65,3 +65,8 @@ if [ -d $HOME/Developer/vast ]; then
     source $HOME/Developer/vast/initrc.sh
 fi
 
+# Damned be the LM Studio developer who insisted on shoving this into .zshrc!
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/michael.shustin/.lmstudio/bin"
+# End of LM Studio CLI section
+
