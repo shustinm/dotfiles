@@ -13,6 +13,17 @@ zinit light zsh-users/zsh-autosuggestions
 zinit ice wait lucid
 zinit light hlissner/zsh-autopair
 
+# zoxide is a smarter cd command, inspired by z and autojump.
+# It remembers which directories you use most frequently,
+# so you can "jump" to them in just a few keystrokes.
+zi ice wait lucid as"command" from"gh-r" \
+  eval"./zoxide init --cmd x zsh"
+zi light ajeetdsouza/zoxide
+
+zi ice wait lucid as'zoxide'
+zi light z-shell/zsh-zoxide
+
+
 # Load fuzzy finding plugins (requires fzf)
 if command -v fzf >/dev/null 2>&1; then
     zinit wait lucid for \
