@@ -58,6 +58,13 @@
       fi
     stdout: true
     stdin: true
+  - description: Install UV
+    command: |
+      if ! command -v uv &> /dev/null; then
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+      fi
+    stdout: true
+    stdin: true
   - description: mac configuration
     command: |
       if [ "$(uname -s)" = "Darwin" ]; then
