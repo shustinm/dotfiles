@@ -43,6 +43,8 @@ if [ "$DROP_IN_REPLACEMENTS" = "1" ]; then
     fi
     if command -v eza >/dev/null 2>&1; then
         alias ls="eza ${EZA_PARAMS}"
+    elif command -v exa >/dev/null 2>&1; then
+        alias ls="exa ${EZA_PARAMS}"
     fi
 fi
 
