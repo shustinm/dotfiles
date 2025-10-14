@@ -32,11 +32,11 @@
   - description: Install packages
     command: |
       if [ "`uname`" = "Linux" ]; then
-        id_like=$(awk -F= '/^ID_LIKE/{print $2}' /etc/os-release)
-        if [[ $id_like = *'ubuntu'* ]]; then
+        id=$(awk -F= '/^ID=/{print $2}' /etc/os-release | tr -d '"')
+        if [[ $id = *'ubuntu'* ]]; then
           sudo apt update
           sudo apt install -y $(cat apt/packages.txt)
-        elif [[ $id_like = *'fedora'* ]]; then
+        elif [[ $id = *'fedora'* ]]; then
           sudo dnf upgrade -y --refresh
           sudo dnf install -y epel-release 'dnf-command(config-manager)'
           while read in; do sudo rpm --import "$in"; done < dnf/rpm_keys.txt
@@ -51,7 +51,7 @@
     command: |
       if [ "$(uname -s)" = "Linux" ]; then
         if ! command -v nvim &> /dev/null; then
-          curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+          curl -L -o nvim.appimage "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-$(uname -m).appimage"
           chmod u+x nvim.appimage
           sudo mv nvim.appimage /usr/bin/nvim
         fi

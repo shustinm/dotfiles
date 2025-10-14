@@ -10,3 +10,5 @@ golang
 unzip
 python3-venv
 libfuse2
+curl
+zsh
