@@ -2,4 +2,6 @@ theme = catppuccin-mocha.conf
 window-save-state = always
 macos-titlebar-style = tabs
 macos-option-as-alt = left
-font-size = 15.5
+font-size = 16.5
+font-family = "JetBrainsMono Nerd Font Mono"
+shell-integration-features = ssh-env,ssh-terminfo
