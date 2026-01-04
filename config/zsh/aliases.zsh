@@ -48,3 +48,8 @@ alias ip6="ip6_interfaces"
 if command -v fastfetch >/dev/null 2>&1; then
     alias neofetch="fastfetch"
 fi
+
+# icloud alias (macOS only)
+if [[ "$OSTYPE" == darwin* ]]; then
+    alias icloud="cd '$HOME/Library/Mobile Documents/com~apple~CloudDocs/'"
+fi
