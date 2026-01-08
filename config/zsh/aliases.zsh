@@ -30,6 +30,9 @@ function gph {
     git pull origin $(git rev-parse --abbrev-ref HEAD)
 }
 
+# Uses banyan/zsh-fzf-git-worktree
+alias gwt=fzf-git-worktree
+
 # Function to list interfaces with IPv4 addresses
 ip4_interfaces() {
   ifconfig | awk '/^[a-z]/ {iface=$1} /inet / {print iface, $2}'

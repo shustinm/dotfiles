@@ -28,7 +28,8 @@ zi light z-shell/zsh-zoxide
 if command -v fzf >/dev/null 2>&1; then
     zinit wait lucid for \
         joshskidmore/zsh-fzf-history-search \
-        Aloxaf/fzf-tab
+        Aloxaf/fzf-tab \
+        banyan/zsh-fzf-git-worktree
 fi
 
 # Oh-my-zsh snippet for ls aliases (ll, la...)
