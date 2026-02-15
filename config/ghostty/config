@@ -2,6 +2,14 @@ theme = catppuccin-mocha.conf
 window-save-state = always
 macos-titlebar-style = tabs
 macos-option-as-alt = left
-font-size = 16.5
+font-size = 19.5
 font-family = "JetBrainsMono Nerd Font Mono"
 shell-integration-features = ssh-env,ssh-terminfo
+
+keybind = unconsumed:ctrl+h=goto_split:left
+keybind = unconsumed:ctrl+l=goto_split:right
+keybind = unconsumed:ctrl+j=goto_split:down
+keybind = unconsumed:ctrl+k=goto_split:up
+keybind = unconsumed:ctrl+enter=toggle_split_zoom
+
+unfocused-split-fill = #080808
