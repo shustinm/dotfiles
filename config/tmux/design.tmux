@@ -19,8 +19,8 @@ set -q -g status-utf8 on
 setw -q -g utf8 on
 
 ### PANE COLORS ###
-set -g window-style 'bg=default'
-set -g window-active-style 'bg=default'
+set -g window-style 'bg=#181825'
+set -g window-active-style 'bg=#1e1e2e'
 
 ### THEME (Nova) ###
 set -g @nova-nerdfonts true
@@ -54,8 +54,8 @@ set -g "@nova-status-style-fg" "$inactive_fg"
 set -g "@nova-status-style-active-bg" "$active_bg"
 set -g "@nova-status-style-active-fg" "$active_fg"
 
-set -g "@nova-pane-active-border-style" "#44475a"
-set -g "@nova-pane-border-style" "#1865b5"
+set -g "@nova-pane-active-border-style" "#89b4fa"
+set -g "@nova-pane-border-style" "#313244"
 set-window-option -g mode-style "bg=#27406b,fg=#ffffff"
 
 ### STATUS BAR ###
