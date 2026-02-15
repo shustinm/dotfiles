@@ -67,7 +67,7 @@ bind -T prefix k select-pane -U
 bind -T prefix l select-pane -R
 
 # Send C-l to shell (clear) since C-l is used for pane navigation
-bind -T prefix C-l send-keys C-l
+bind -T prefix g send-keys C-l
 
 # Copy-mode navigation
 bind -T copy-mode-vi C-h select-pane -L

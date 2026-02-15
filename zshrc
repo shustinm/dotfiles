@@ -56,7 +56,7 @@ if [ -f $XDG_CONFIG_HOME/op/plugins.sh ]; then
     source $XDG_CONFIG_HOME/op/plugins.sh
 fi
 
-for file in vars.zsh plugins.zsh aliases.zsh; do
+for file in vars.zsh plugins.zsh aliases.zsh bindkeys.zsh; do
     [ -f "$XDG_CONFIG_HOME/zsh/$file" ] && source "$XDG_CONFIG_HOME/zsh/$file"
 done
 
