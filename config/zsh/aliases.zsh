@@ -56,3 +56,8 @@ fi
 if [[ "$OSTYPE" == darwin* ]]; then
     alias icloud="cd '$HOME/Library/Mobile Documents/com~apple~CloudDocs/'"
 fi
+
+if command -v lstr >/dev/null 2>&1; then
+    alias lstr="lstr --icons"
+    alias lll="lstr -L2"
+fi
