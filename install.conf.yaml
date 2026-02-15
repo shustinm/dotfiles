@@ -25,7 +25,21 @@
   - ~/.config
 
 - shell:
-  - description: install starship
+  - description: Install Homebrew (Mac Only)
+    command: |
+      if [ "$(uname -s)" = "Darwin" ]; then
+        command -v homebrew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      fi
+    stdout: true
+    stdin: true
+  - description: Install Zerobrew (Mac Only)
+    command: |
+      if [ "$(uname -s)" = "Darwin" ]; then
+        command -v zb >/dev/null || curl -fsSL https://zerobrew.rs/install | bash
+      fi
+    stdout: true
+    stdin: true
+  - description: Install Starship
     command: command -v starship >/dev/null || curl -sS https://starship.rs/install.sh | sh
     stdout: true
     stdin: true
