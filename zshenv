@@ -2,10 +2,24 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 # Priority before standard PATH
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
+if [[ "$(uname)" == "Darwin" ]]; then
+	export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
+fi
 
-# Priority before standard PATH
-export PATH="$PATH:$HOME/go/bin"
+if [ -d "$HOME/go/bin" ]; then
+	export PATH="$PATH:$HOME/go/bin"
+fi
+
+# LM Studio CLI
+if [ -d "$HOME/.lmstudio/bin" ]; then
+	export PATH="$PATH:$HOME/.lmstudio/bin"
+fi
+
+# bun
+if [ -d "$HOME/.bun" ]; then
+	export BUN_INSTALL="$HOME/.bun"
+	export PATH="$BUN_INSTALL/bin:$PATH"
+fi
 
 # Source cargo (rust) if exists
 if [ -f "$HOME/.cargo/env" ]; then
@@ -13,8 +27,8 @@ if [ -f "$HOME/.cargo/env" ]; then
 fi
 
 # zerobrew
-export ZEROBREW_DIR=/Users/michael.shustin/.zerobrew
-export ZEROBREW_BIN=/Users/michael.shustin/.zerobrew/bin
+export ZEROBREW_DIR="$HOME/.zerobrew"
+export ZEROBREW_BIN="$HOME/.zerobrew/bin"
 export ZEROBREW_ROOT=/opt/zerobrew
 export ZEROBREW_PREFIX=/opt/zerobrew/prefix
 export PKG_CONFIG_PATH="$ZEROBREW_PREFIX/lib/pkgconfig:${PKG_CONFIG_PATH:-}"

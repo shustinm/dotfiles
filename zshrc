@@ -52,10 +52,12 @@ if [ "$TERM" = "xterm-kitty" ]; then
     alias ssh="kitty +kitten ssh"
 fi
 
+# 1Password plugins
 if [ -f $XDG_CONFIG_HOME/op/plugins.sh ]; then
     source $XDG_CONFIG_HOME/op/plugins.sh
 fi
 
+# Load the configuration files in the correct order
 for file in vars.zsh plugins.zsh aliases.zsh bindkeys.zsh; do
     [ -f "$XDG_CONFIG_HOME/zsh/$file" ] && source "$XDG_CONFIG_HOME/zsh/$file"
 done
@@ -65,8 +67,6 @@ if [ -d $HOME/Developer/vast ]; then
     source $HOME/Developer/vast/initrc.sh
 fi
 
-# Damned be the LM Studio developer who insisted on shoving this into .zshrc!
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/michael.shustin/.lmstudio/bin"
-# End of LM Studio CLI section
 
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
