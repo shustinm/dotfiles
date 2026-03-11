@@ -7,10 +7,18 @@
 #################
 ##### UTILS #####
 #################
-is_nvim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|nvim?x?)(diff)?$'"
-is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|vim?x?)(diff)?$'"
-is_fzf="ps -o state= -o comm= -t '#{pane_tty}' | grep -q 'S fzf'"
-is_less="tmux capture-pane -p -t '#{pane_id}' | tail -n 1 | grep '^:$'"
+# Format-based detection (no shell spawn — evaluated by tmux internally)
+# pane_current_command: detects local processes instantly
+# pane_title: detects over SSH (nvim sets title by default)
+is_nvim="#{||:#{||:#{m:*nvim*,#{pane_current_command}},#{m:*nvim*,#{pane_title}}},#{m:*nvim*,#{window_name}}}"
+is_vim="#{||:#{||:#{m:*vim*,#{pane_current_command}},#{m:*vim*,#{pane_title}}},#{m:*vim*,#{window_name}}}"
+is_fzf="#{m:*fzf*,#{pane_current_command}}"
+is_nvim_or_fzf="#{||:$is_nvim,$is_fzf}"
+
+# Shell-based detection for pagers (capture-pane works over SSH)
+is_less="tmux capture-pane -p -t '#{pane_id}' | tail -n 1 | grep -q '^:$'"
+is_slit="tmux capture-pane -p -t '#{pane_id}' | tail -n 1 | grep -qE '^ *[0-9]+/[0-9]+ *$'"
+is_pager="$is_less || $is_slit"
 
 ##### MISC #####
 # Force Vi mode for keyboard users
@@ -30,10 +38,10 @@ bind -n Home send-key C-a
 # Alt+e = split horizontal (side by side), Alt+Shift+E = split vertical (stacked)
 # Alt+\ and Alt+- also work as alternatives
 # Note: Alt+o is reserved for sesh session picker (see below)
-bind -n M-e if-shell "$is_nvim" "send-keys M-e" 'split-window -h -c "#{pane_current_path}"'
-bind -n M-E if-shell "$is_nvim" "send-keys M-E" 'split-window -v -c "#{pane_current_path}"'
-bind -n M-'\' if-shell "$is_nvim" "send-keys M-\\\\" 'split-window -h -c "#{pane_current_path}"'
-bind -n M-'-' if-shell "$is_nvim" "send-keys M--" 'split-window -v -c "#{pane_current_path}"'
+bind -n M-e if-shell -F "$is_nvim" "send-keys M-e" 'split-window -h -c "#{pane_current_path}"'
+bind -n M-E if-shell -F "$is_nvim" "send-keys M-E" 'split-window -v -c "#{pane_current_path}"'
+bind -n M-'\' if-shell -F "$is_nvim" "send-keys M-\\\\" 'split-window -h -c "#{pane_current_path}"'
+bind -n M-'-' if-shell -F "$is_nvim" "send-keys M--" 'split-window -v -c "#{pane_current_path}"'
 
 # Alternative: Use prefix for splits (always works)
 bind -T prefix '\' split-window -h -c "#{pane_current_path}"
@@ -42,7 +50,7 @@ bind -T prefix '|' split-window -h -c "#{pane_current_path}"
 bind -T prefix '_' split-window -v -c "#{pane_current_path}"
 
 # Close pane with ALT+w, close window with ALT+Shift+W
-bind -n M-w if-shell "$is_nvim" "send-keys M-w" "kill-pane"
+bind -n M-w if-shell -F "$is_nvim" "send-keys M-w" "kill-pane"
 bind -n M-W kill-window
 
 # ─────────────────────────────────────
@@ -55,10 +63,10 @@ bind -n M-Up select-pane -U
 bind -n M-Right select-pane -R
 
 # Ctrl+hjkl also works (vim-style, nvim-aware)
-bind -n C-h if-shell "$is_nvim" 'send-keys C-h' 'select-pane -L'
-bind -n C-j if-shell "$is_nvim || $is_fzf" 'send-keys C-j' 'select-pane -D'
-bind -n C-k if-shell "$is_nvim || $is_fzf" 'send-keys C-k' 'select-pane -U'
-bind -n C-l if-shell "$is_nvim" 'send-keys C-l' 'select-pane -R'
+bind -n C-h if-shell -F "$is_nvim" 'send-keys C-h' 'select-pane -L'
+bind -n C-j if-shell -F "$is_nvim_or_fzf" 'send-keys C-j' 'select-pane -D'
+bind -n C-k if-shell -F "$is_nvim_or_fzf" 'send-keys C-k' 'select-pane -U'
+bind -n C-l if-shell -F "$is_nvim" 'send-keys C-l' 'select-pane -R'
 
 # Prefix + hjkl also works for navigation (always available)
 bind -T prefix h select-pane -L
@@ -103,6 +111,9 @@ bind -r -T prefix M-L move-pane -t '.{right-of}'
 
 # Zoom/Unzoom pane with Alt+z (no conflict with AeroSpace)
 bind -n M-z resize-pane -Z
+
+# Cycle zoomed pane with Alt+Shift+Z (next pane, stay zoomed if already zoomed)
+bind -n M-Z select-pane -t :.+ \; resize-pane -Z
 
 # Layout presets in prefix mode
 bind -T prefix = select-layout even-horizontal
@@ -224,7 +235,7 @@ bind -T copy-mode-vi M-']' select-window -n
 #         COPY MODE
 # ─────────────────────────────────────
 # Start copy mode with Alt+c (no AeroSpace conflict)
-bind -n M-c if-shell "$is_less" 'copy-mode; send-keys -X top-line' 'copy-mode'
+bind -n M-c if-shell "$is_pager" 'copy-mode; send-keys -X top-line' 'copy-mode'
 
 # Start copy with Space
 bind -T copy-mode-vi Space send-keys -X begin-selection
@@ -245,19 +256,19 @@ bind -T copy-mode-vi C-c send-keys -X copy-selection
 bind -T copy-mode-vi y run-shell "tmux send-keys -X copy-pipe 'pbcopy'; true"
 
 # Enter copy mode + scroll from root mode, Ignored when in nvim/less
-bind -n C-u if-shell "$is_nvim || $is_vim || $is_less" "send-keys C-u" 'copy-mode; send-keys -X halfpage-up'
+bind -n C-u if-shell -F "$is_vim" "send-keys C-u" { if-shell "$is_pager" "send-keys C-u" "copy-mode; send-keys -X halfpage-up" }
 
 # ─────────────────────────────────────
 #         MOUSE COPY MODE
 # ─────────────────────────────────────
 # Copy word with double click
-bind -n DoubleClick1Pane if-shell "$is_nvim" "" 'copy-mode -M; send-keys -X select-word; run-shell "sleep 0.2"; send-keys -X copy-pipe-and-cancel'
+bind -n DoubleClick1Pane if-shell -F "$is_nvim" "" 'copy-mode -M; send-keys -X select-word; run-shell "sleep 0.2"; send-keys -X copy-pipe-and-cancel'
 
 # Triple click to select line
-bind -n TripleClick1Pane if-shell "$is_nvim" "" 'copy-mode -M; send-keys -X select-line; run-shell "sleep 0.2"; send-keys -X copy-pipe-and-cancel'
+bind -n TripleClick1Pane if-shell -F "$is_nvim" "" 'copy-mode -M; send-keys -X select-line; run-shell "sleep 0.2"; send-keys -X copy-pipe-and-cancel'
 
 # Click and drag to select text, copy on mouse release
-bind -n MouseDrag1Pane if-shell "$is_nvim" "" 'copy-mode -M'
+bind -n MouseDrag1Pane if-shell -F "$is_nvim" "" 'copy-mode -M'
 bind -T copy-mode-vi MouseDrag1Pane send-keys -X begin-selection
 bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'pbcopy'
 
@@ -268,7 +279,7 @@ bind -n MouseDown3Pane paste-buffer
 #         MISC BINDS
 # ─────────────────────────────────────
 # Toggle type on all panes (synchronize)
-bind -n F12 if-shell "$is_nvim" "send-keys F12" 'setw synchronize-panes'
+bind -n F12 if-shell -F "$is_nvim" "send-keys F12" 'setw synchronize-panes'
 
 # ─────────────────────────────────────
 #         PLUGINS BINDS
@@ -276,7 +287,7 @@ bind -n F12 if-shell "$is_nvim" "send-keys F12" 'setw synchronize-panes'
 ##### TMUX-THUMBS #####
 # NOTE: Changed from Alt+s to Alt+y to avoid AeroSpace conflict
 # Copy fast with Alt+y
-bind -n M-y if-shell "$is_nvim" "send-keys M-y" 'thumbs-pick'
+bind -n M-y if-shell -F "$is_nvim" "send-keys M-y" 'thumbs-pick'
 
 ##### TMUX-JUMP #####
 # Tmux jump (like vimium) with ALT+shift+y
@@ -285,18 +296,18 @@ bind -n M-Y run-shell -b $HOME/.tmux/plugins/tmux-jump/scripts/tmux-jump.sh
 ##### tmux-text-macros #####
 open_macros="tmux split-window -v \"PANE='#{pane_id}' $HOME/.tmux/plugins/tmux-text-macros/tmux-text-macros.tmux -r\""
 # Open macros menu with Alt+m (no AeroSpace conflict)
-bind -n M-m if-shell "$is_nvim" "send-keys M-m" 'run-shell $open_macros'
+bind -n M-m if-shell -F "$is_nvim" "send-keys M-m" 'run-shell $open_macros'
 
 # Open macros menu with Alt+shift+m anywhere
 bind -n M-M run-shell $open_macros
 
 bind -n M-p run-shell -b "TMUX_FZF_OPTIONS='-p -w 80% -h 80% -m' $HOME/.tmux/plugins/tmux-fzf/scripts/clipboard.sh buffer"
 
-bind -n C-Space if-shell "$is_nvim" "send-keys C-Space" 'run-shell "$HOME/.tmux/plugins/extrakto/scripts/open.sh #{pane_id}"'
+bind -n C-Space if-shell -F "$is_nvim" "send-keys C-Space" 'run-shell "$HOME/.tmux/plugins/extrakto/scripts/open.sh #{pane_id}"'
 
 # Fuzzback - fuzzy search in scrollback
 # NOTE: Using only Alt+/ to avoid AeroSpace Alt+f conflict
-bind -n M-'/' if-shell "$is_nvim" "send-keys M-/" 'run-shell -b $HOME/.tmux/plugins/tmux-fuzzback/scripts/fuzzback.sh'
+bind -n M-'/' if-shell -F "$is_nvim" "send-keys M-/" 'run-shell -b $HOME/.tmux/plugins/tmux-fuzzback/scripts/fuzzback.sh'
 
 # Also available via prefix
 bind -T prefix f run-shell -b $HOME/.tmux/plugins/tmux-fuzzback/scripts/fuzzback.sh

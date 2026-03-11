@@ -12,3 +12,6 @@ export BAT_PARAMS="-p"
 # Use nvim as editor, but disable vim mode in terminal
 export EDITOR=nvim
 bindkey -e
+
+# Render tabs as 4 spaces
+tabs -4
