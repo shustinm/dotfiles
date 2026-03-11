@@ -12,5 +12,6 @@ ncdu
 nodejs
 npm
 tmux
+unrar
 unzip
 zsh
