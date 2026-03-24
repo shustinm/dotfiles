@@ -15,4 +15,5 @@ keybind = performable:ctrl+k=goto_split:up
 keybind = performable:ctrl+enter=toggle_split_zoom
 split-preserve-zoom = navigation
 keybind = alt+shift+z=goto_split:next
+keybind = cmd+shift+m=prompt_surface_title
 
