@@ -8,10 +8,10 @@ macos-option-as-alt = left
 font-size = 18
 shell-integration-features = ssh-env,ssh-terminfo
 
-keybind = performable:ctrl+h=goto_split:left
-keybind = performable:ctrl+l=goto_split:right
-keybind = performable:ctrl+j=goto_split:down
-keybind = performable:ctrl+k=goto_split:up
+keybind = performable:ctrl+shift+alt+super+h=goto_split:left
+keybind = performable:ctrl+shift+alt+super+l=goto_split:right
+keybind = performable:ctrl+shift+alt+super+j=goto_split:down
+keybind = performable:ctrl+shift+alt+super+k=goto_split:up
 keybind = performable:ctrl+enter=toggle_split_zoom
 split-preserve-zoom = navigation
 keybind = alt+shift+z=goto_split:next
