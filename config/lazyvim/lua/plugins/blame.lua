@@ -3,7 +3,7 @@ return {
     "FabijanZulj/blame.nvim",
     cmd = "BlameToggle",
     keys = {
-      { "<leader>gb", "<cmd>BlameToggle<cr>", desc = "Toggle Git Blame" },
+      { "<leader>ga", "<cmd>BlameToggle<cr>", desc = "Git Annotations" },
     },
     opts = {
       format_fn = function(line_porcelain, config, idx)
