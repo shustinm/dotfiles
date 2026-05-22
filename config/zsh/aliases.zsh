@@ -33,6 +33,8 @@ function gph {
 # Uses banyan/zsh-fzf-git-worktree
 alias gwt=fzf-git-worktree
 
+alias ..g='cd "$(git rev-parse --show-toplevel)"'
+
 # Function to list interfaces with IPv4 addresses
 ip4_interfaces() {
   ifconfig | awk '/^[a-z]/ {iface=$1} /inet / {print iface, $2}'

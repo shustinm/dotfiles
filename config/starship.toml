@@ -31,3 +31,8 @@ when = 'git config --local --get branch.$(git branch --show-current).target'
 format = '[$output]($style) '
 ignore_timeout = true
 
+[direnv]
+disabled = false
+symbol = "󱧶 "
+style = "bold yellow"
+format = "[$symbol]($style)"

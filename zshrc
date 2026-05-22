@@ -62,9 +62,8 @@ for file in vars.zsh plugins.zsh aliases.zsh bindkeys.zsh; do
     [ -f "$XDG_CONFIG_HOME/zsh/$file" ] && source "$XDG_CONFIG_HOME/zsh/$file"
 done
 
-# VAST
-if [ -d $HOME/Developer/vast ]; then
-    source $HOME/Developer/vast/initrc.sh
+if command -v direnv &> /dev/null; then
+    eval "$(direnv hook zsh)"
 fi
 
 

@@ -40,7 +40,7 @@
     stdout: true
     stdin: true
   - description: Install Starship
-    command: command -v starship >/dev/null || curl -sS https://starship.rs/install.sh | sh
+    command: command -v starship >/dev/null || sudo mkdir /usr/local/bin && curl -sS https://starship.rs/install.sh | sh
     stdout: true
     stdin: true
   - description: Install packages
