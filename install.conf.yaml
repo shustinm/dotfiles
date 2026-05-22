@@ -25,6 +25,8 @@
   - ~/.config
 
 - shell:
+  - description: Configure git hooks for manifest sorting
+    command: git config core.hooksPath githooks
   - description: Install Homebrew (Mac Only)
     command: |
       if [ "$(uname -s)" = "Darwin" ]; then

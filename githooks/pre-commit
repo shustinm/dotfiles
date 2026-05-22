@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+root="$(git rev-parse --show-toplevel)"
+manifests=(
+  apt/packages.txt
+  dnf/repos.txt
+  dnf/packages.txt
+  Brewfile
+)
+
+to_sort=()
+for path in "${manifests[@]}"; do
+  if git diff --cached --quiet -- "$path" 2>/dev/null; then
+    continue
+  fi
+  to_sort+=("$path")
+done
+
+if [[ ${#to_sort[@]} -eq 0 ]]; then
+  exit 0
+fi
+
+"$root/scripts/sort-manifests.sh" "${to_sort[@]}"
+git add "${to_sort[@]}"

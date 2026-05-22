@@ -1,7 +1,7 @@
 1password 1password-cli
+bat
 docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 eza
-bat
 fzf
 g++
 gcc
