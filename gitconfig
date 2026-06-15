@@ -1,11 +1,12 @@
 [user]
 	name = Michael Shustin
-	email = michaelshustin@gmail.com
+	email = michael.shustin@vastdata.com
 [push]
 	autoSetupRemote = true
 [alias]
 	hist = log --all --decorate --oneline --graph
 	adog = log --all --decorate --oneline --graph
+	dog = log --decorate --oneline --graph
 
 # Delta start
 [core]
@@ -20,7 +21,7 @@
     tabs = 4           # render tabs as 4 spaces
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 
 [diff]
     colorMoved = default
