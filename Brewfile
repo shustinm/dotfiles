@@ -6,7 +6,7 @@ brew "bash"
 brew "bat"
 brew "btop"
 brew "carapace"
-brew "colima"
+brew "colima", restart_service: true
 brew "coreutils"
 brew "direnv"
 brew "docker"
