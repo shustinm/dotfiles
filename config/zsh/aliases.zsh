@@ -17,6 +17,21 @@ function vf {
     fi
 }
 
+function vw {
+    local cmd filename
+    if [ $# -eq 0 ]; then
+        cmd=$(print -l ${(ok)commands} | fzf)
+    else
+        cmd="$1"
+    fi
+    if [ -n "${cmd}" ]; then
+        filename=$(which "$cmd")
+        if [ -n "${filename}" ]; then
+            $EDITOR "${filename}"
+        fi
+    fi
+}
+
 unalias gco
 function gco {
     if [ $# -eq 0 ]; then
