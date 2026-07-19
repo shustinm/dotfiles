@@ -20,7 +20,7 @@ zinit ice wait lucid as"command" from"gh-r" \
   eval"./zoxide init zsh"
 zinit light ajeetdsouza/zoxide
 
-zinit ice wait lucid as'zoxide'
+zinit ice wait lucid has'zoxide'
 zinit light z-shell/zsh-zoxide
 
 
