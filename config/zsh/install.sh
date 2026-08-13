@@ -66,6 +66,13 @@ backup_zsh_files() {
             echo -e "${GREEN}${CHECKMARK}${RESET} Backed up $(basename "$file") to $(basename "$backup_file")"
         fi
     done
+
+    local starship_path="$HOME/.config/starship.toml"
+    if [[ -f "$starship_path" ]]; then
+        local backup_file="${starship_path}.backup_$timestamp"
+        cp "$starship_path" "$backup_file"
+        echo -e "${GREEN}${CHECKMARK}${RESET} Backed up $(basename "$starship_path") to $(basename "$backup_file")"
+    fi
 }
 
 download_zsh_files() {
@@ -90,6 +97,12 @@ download_zsh_files() {
         curl -fsSL "$url" -o "$dest" && \
             echo -e "${GREEN}${CHECKMARK}${RESET} Downloaded $CONFIG_LOCATION/$file"
     done
+
+    mkdir -p "$HOME/.config" || { echo "Failed to create directory $HOME/.config"; exit 1; }
+    url="https://raw.githubusercontent.com/$REPO/main/config/starship.toml"
+    dest="$HOME/.config/starship.toml"
+    curl -fsSL "$url" -o "$dest" && \
+        echo -e "${GREEN}${CHECKMARK}${RESET} Downloaded config/starship.toml"
 }
 
 echo -e "${BOLD}${BLUE}Installing prerequisites...${RESET}"
