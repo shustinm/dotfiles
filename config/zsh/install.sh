@@ -16,17 +16,29 @@ CONFIG_LOCATION="config/zsh"
 BARE_FILES="zshrc zprofile zshenv"
 IGNORED_FILES="install.sh README.md"
 
+is_installed() {
+    local software_name=$1
+    local check_command=$2
+
+    if [[ -n "$check_command" ]]; then
+        eval "$check_command" &> /dev/null
+    else
+        command -v "$software_name" &> /dev/null
+    fi
+}
+
 check_and_install() {
     local software_name=$1
     local install_command=$2
+    local check_command=$3
 
-    if command -v "$software_name" &> /dev/null; then
+    if is_installed "$software_name" "$check_command"; then
         echo -e "${GREEN}${CHECKMARK}${RESET} $software_name is already installed."
     else
         echo -e "${RED}${CROSS}${RESET} $software_name is ${RED}not${RESET} installed."
         echo "Installing $software_name..."
         eval "$install_command"
-        if command -v "$software_name" &> /dev/null; then
+        if is_installed "$software_name" "$check_command"; then
             echo -e "${GREEN}${CHECKMARK} $software_name installed successfully.${RESET}"
         else
             echo -e "${RED}${CROSS} Installation of $software_name failed. Please check and try again.${RESET}"
@@ -83,7 +95,7 @@ download_zsh_files() {
 echo -e "${BOLD}${BLUE}Installing prerequisites...${RESET}"
 check_and_install "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
 check_and_install "starship" "brew install starship"
-check_and_install "font-jetbrains-mono-nerd-font" "brew install font-jetbrains-mono-nerd-font"
+check_and_install "font-jetbrains-mono-nerd-font" "brew install --cask font-jetbrains-mono-nerd-font" "brew list --cask font-jetbrains-mono-nerd-font"
 check_and_install "bat" "brew install bat"
 check_and_install "fzf" "brew install fzf"
 check_and_install "eza" "brew install eza"
