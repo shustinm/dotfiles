@@ -19,6 +19,7 @@
       path: Brewfile
     ~/.ideavimrc: jetbrains/.ideavimrc
     ~/.hushlogin: hushlogin
+    ~/.local/bin/git-rmi: scripts/git-rmi.sh
 
 - create:
   - ~/Developer
