@@ -4,6 +4,8 @@ return {
     opts = {
       inverses = {
         ["start"] = "stop",
+        ["on"] = "off",
+        -- FIXME: Can't toggle this: -DBUILD_SHARED_LIBS=OFF \
       },
       remove_default_keybinds = true,
     },
