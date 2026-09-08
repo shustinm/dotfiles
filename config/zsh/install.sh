@@ -27,6 +27,42 @@ is_installed() {
     fi
 }
 
+detect_editor() {
+    local candidates=(nvim vim vi nano)
+    local candidate
+
+    for candidate in "${candidates[@]}"; do
+        if is_installed "$candidate"; then
+            echo "$candidate"
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+configure_editor() {
+    local editor
+    local vars_file="$HOME/.$CONFIG_LOCATION/vars.zsh"
+
+    if ! editor=$(detect_editor); then
+        echo -e "${RED}${CROSS}${RESET} No supported editor found (nvim, vim, vi, nano)."
+        return 1
+    fi
+
+    if [[ ! -f "$vars_file" ]]; then
+        echo -e "${RED}${CROSS}${RESET} vars.zsh not found; skipping EDITOR configuration."
+        return 1
+    fi
+
+    local tmp_file
+    tmp_file=$(mktemp)
+    sed "s/^export EDITOR=.*/export EDITOR=$editor/" "$vars_file" > "$tmp_file"
+    mv "$tmp_file" "$vars_file"
+
+    echo -e "${GREEN}${CHECKMARK}${RESET} Set EDITOR=$editor"
+}
+
 check_and_install() {
     local software_name=$1
     local install_command=$2
@@ -118,3 +154,6 @@ backup_zsh_files
 
 echo -e "\n${BOLD}${BLUE}Downloading Zsh configuration from ${REPO}${RESET}"
 download_zsh_files
+
+echo -e "\n${BOLD}${BLUE}Configuring editor...${RESET}"
+configure_editor
